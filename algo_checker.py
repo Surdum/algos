@@ -21,7 +21,10 @@ class AlgoChecker:
     time_results = []
 
     def __init__(self, alg_class):
-        self.alg_class = alg_class
+        self.alg = alg_class()
+        self.print(f'======================================', Colors.UNDERLINE)
+        print(f"{self.name}\nVersion: {self.version}\nAlgorithm: ", end='')
+        self.print(f"{self.alg.description}", Colors.BOLD)
 
     def normalize_time(self, t):
         if int(t) > 0:
@@ -38,12 +41,30 @@ class AlgoChecker:
     def print(self, text, color, **kwargs):
         print(f"{color}{text}{Colors.ENDC}", **kwargs)
 
-    def check(self, test_count, folder_with_tests):
-        alg = self.alg_class()
-        self.print(f'======================================', Colors.UNDERLINE)
-        print(f"{self.name}\nVersion: {self.version}\nAlgorithm: ", end='')
-        self.print(f"{alg.description}", Colors.BOLD)
+    def run_one_test(self, input_, expected_output):
+        self.print(f'======================================', Colors.HEADER)
+        self.print(f'Test started...', Colors.BOLD + Colors.OKCYAN)
+        start_time = time()
+        try:
+            actual_out = self.alg.run(input_)
+        except Exception as e:
+            actual_out = f'ERROR: {e}'
+        total_time = time() - start_time
 
+        if not str(actual_out).startswith('ERROR') and actual_out == expected_output:
+            self.print(f'Input: {input_}\n'
+                       f'Output: {actual_out}\n'
+                       f'Total time: {self.normalize_time(total_time)}\n'
+                       f'Test finished successfully.', Colors.OKGREEN)
+        else:
+            self.print(f'Input: {input_}\nExpected output: "{expected_output}"; Actual output: "{actual_out}"',
+                       Colors.WARNING)
+            self.print(f'Total time: {self.normalize_time(total_time)}\nTest finished unsuccessfully',
+                       Colors.FAIL)
+            return False
+        return True
+
+    def check(self, test_count, folder_with_tests):
         for i in range(test_count):
             self.print(f'======================================', Colors.HEADER)
             self.print(f'Test {i+1} started...', Colors.BOLD + Colors.OKCYAN)
@@ -62,7 +83,7 @@ class AlgoChecker:
             start_time = time()
             try:
                 args = inp.split() if inp else [inp]
-                actual_out = alg.run(*alg.prepare_args(*args))
+                actual_out = self.alg.run(*self.alg.prepare_args(*args))
             except Exception as e:
                 actual_out = f'ERROR: {e}'
             total_time = time() - start_time
