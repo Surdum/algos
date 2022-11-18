@@ -17,7 +17,7 @@ class SimpleEnumeration(AlgoBase):
         return s
 
 
-class SumOfSquares(AlgoBase):  # O(10^n + )
+class SumOfSquares(AlgoBase):
     description = 'Calculate sums of the digits of any number, square it and sum in result'
 
     def prepare_args(self, n: str) -> list:
@@ -37,7 +37,7 @@ class FastLuckyNumbersCounter(AlgoBase):
     def prepare_args(self, n: str) -> list:
         return [int(n)]
 
-    def run(self, n):  # n * ( 9 * i +  )
+    def run(self, n):
         t = [1]
         for j in range(1, n + 1):
             p = [0 for _ in range(j * 9 + 1)]
