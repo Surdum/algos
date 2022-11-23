@@ -16,7 +16,7 @@ class Colors:
 
 class AlgoChecker:
     name = "AlgoChecker by Babaev George"
-    version = "13.11.2022"
+    version = "24.11.2022"
     alg_class = None
     time_results = []
 
@@ -74,15 +74,15 @@ class AlgoChecker:
                 print(f'Test {i+1} ignored: no input or output file')
                 continue
 
-            inp = open(in_file).readline()
+            inp = open(in_file).read()
             inp = "" if not self.unify(inp) else self.unify(inp)
 
-            expected_out = open(out_file).readline()
+            expected_out = open(out_file).read()
             expected_out = "" if not self.unify(expected_out) else self.unify(expected_out)
 
             start_time = time()
             try:
-                args = inp.split() if inp else [inp]
+                args = inp.split('\n') if inp else [inp]
                 actual_out = self.alg.run(*self.alg.prepare_args(*args))
             except Exception as e:
                 actual_out = f'ERROR: {e}'
