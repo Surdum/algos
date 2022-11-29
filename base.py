@@ -1,5 +1,5 @@
 class AlgoBase:
-    description = None
+    description = NotImplemented
 
     def prepare_args(self, *args):
         raise NotImplementedError

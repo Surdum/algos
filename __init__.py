@@ -1,2 +1,2 @@
-from .algo_checker import AlgoChecker
+from .algo_checker import AlgoTester
 from .base import AlgoBase

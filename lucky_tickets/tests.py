@@ -3,12 +3,12 @@ from algorithms import SimpleEnumeration, SumOfSquares, FastLuckyNumbersCounter
 
 
 if __name__ == '__main__':
-    checker = AlgoChecker(SimpleEnumeration)  # slow
+    checker = AlgoTester(SimpleEnumeration)  # slow
     checker.check(3, '1.Tickets')
-    my = AlgoChecker(SumOfSquares)  # little faster
+    my = AlgoTester(SumOfSquares)  # little faster
     my.check(6, '1.Tickets')
     # my.show_time_graph()
-    my = AlgoChecker(FastLuckyNumbersCounter)  # really fast
+    my = AlgoTester(FastLuckyNumbersCounter)  # really fast
     my.check(10, '1.Tickets')
 
     my.run_one_test(10, 3081918923741896840)
