@@ -7,21 +7,21 @@ from algorithms import IterativeFibonacci, RecursiveFibonacci, \
 if __name__ == '__main__':
     performance = {}
 
-    # algs = [IterativeFibonacci, RecursiveFibonacci, GolderRatioFibonacci, MatrixMultiplicationFibonacci]
-    # iterations = 1000
-    # tester_args = (7, '4.Fibo')
-    #
-    # perf_test = PerformanceComparator(algs)
-    # perf_test.calculate(iterations, tester_args)
-    # perf_test.show_graph('Fibonacci')
-
-    algs = [IterativeFibonacci, GolderRatioFibonacci]
+    algs = [IterativeFibonacci, RecursiveFibonacci, GolderRatioFibonacci, MatrixMultiplicationFibonacci]
     iterations = 2000
-    tester_args = (8, '4.Fibo')
+    tester_args = (7, '4.Fibo')
 
     perf_test = PerformanceComparator(algs)
     perf_test.calculate(iterations, tester_args)
     perf_test.show_graph('Fibonacci')
+
+    # algs = [IterativeFibonacci, GolderRatioFibonacci]
+    # iterations = 2000
+    # tester_args = (8, '4.Fibo')
+    #
+    # perf_test = PerformanceComparator(algs)
+    # perf_test.calculate(iterations, tester_args)
+    # perf_test.show_graph('Fibonacci')
 
     # checker = AlgoTester(IterativeFibonacci)
     # checker.check(7, '4.Fibo')
