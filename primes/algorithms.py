@@ -50,4 +50,14 @@ class SieveOfEratosthenes(AlgoBase):
         return c
 
 
+if __name__ == '__main__':
+    prime_counter = PrimeNumbersCount()
+    print(prime_counter.run(10))
+    print(prime_counter.run(50))
+    print(prime_counter.run(100))
+
+    erat = SieveOfEratosthenes()
+    print(erat.run(10))
+    print(erat.run(50))
+    print(erat.run(100))
 
