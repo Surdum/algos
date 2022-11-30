@@ -23,7 +23,7 @@ class AlgoTester(ColorPrint):
 
     def print(self, text, color='', **kwargs):
         if not self.no_out:
-            self.__init__(ColorPrint).print(text, color, **kwargs)
+            ColorPrint().print(text, color, **kwargs)
 
     def run_one_test(self, input_, expected_output):
         self.print(f'======================================', Colors.HEADER)
