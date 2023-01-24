@@ -48,15 +48,17 @@ class AlgoTester(ColorPrint):
             return False
         return True
 
-    def check(self, test_count, folder_with_tests, no_out=None, test_start=None):
+    def check(self, test_count, folder_with_tests, no_out=None, skip_tests=None):
         if no_out is not None:
             self.no_out = no_out
-        if test_start is not None and test_count < test_start:
+        if skip_tests is not None and test_count < skip_tests:
             raise Exception("test_start can't be lesser than test_count")
-        if test_start is None:
-            test_start = 0
+        if skip_tests is None:
+            skip_tests = 0
+        if skip_tests != 0:
+            self.print(f"{skip_tests} tests skipped")
         self.performance = []
-        for i in range(test_start, test_count):
+        for i in range(skip_tests, test_count):
             self.print(f'======================================', Colors.HEADER)
             self.print(f'Test {i+1} started...', Colors.BOLD + Colors.OKCYAN)
             in_file = os.path.join(folder_with_tests, f'test.{i}.in')
