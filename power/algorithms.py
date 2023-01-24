@@ -52,12 +52,12 @@ class BinaryExpansionOfTheExponent(AlgoBase):
 
 
 if __name__ == '__main__':
-    # sec = Multiplication()
-    # print(sec.run(2, 64))
-    # alg = Iterative()
-    # print(alg.run(55, 10))
+    alg = Iterative()
+    print(alg.run(2, 64))
+    sec = Multiplication()
+    print(sec.run(2, 64))
     b = BinaryExpansionOfTheExponent()
-    print(b.run(2., 10))
+    print(b.run(2., 64))
 
 
 
