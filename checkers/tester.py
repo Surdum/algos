@@ -48,11 +48,15 @@ class AlgoTester(ColorPrint):
             return False
         return True
 
-    def check(self, test_count, folder_with_tests, no_out=None):
+    def check(self, test_count, folder_with_tests, no_out=None, test_start=None):
         if no_out is not None:
             self.no_out = no_out
+        if test_start is not None and test_count < test_start:
+            raise Exception("test_start can't be lesser than test_count")
+        if test_start is None:
+            test_start = 0
         self.performance = []
-        for i in range(test_count):
+        for i in range(test_start, test_count):
             self.print(f'======================================', Colors.HEADER)
             self.print(f'Test {i+1} started...', Colors.BOLD + Colors.OKCYAN)
             in_file = os.path.join(folder_with_tests, f'test.{i}.in')
@@ -76,8 +80,10 @@ class AlgoTester(ColorPrint):
             total_time = time() - start_time
             self.performance.append((inp, total_time))
             if not self.unify(actual_out).startswith('ERROR') and self.unify(expected_out) == self.unify(actual_out):
+                out = actual_out if len(str(actual_out)) < 50 else \
+                    (str(actual_out)[:50] + f"... + {len(str(actual_out)) - 50} signs")
                 self.print(f'Input: {inp}\n'
-                           f'Output: {actual_out if len(str(actual_out)) < 50 else (str(actual_out)[:50] + f"... + {len(str(actual_out)) - 50} signs")}\n'
+                           f'Output: {out}\n'
                            f'Total time: {normalize_time(total_time)}\n'
                            f'Test {i+1} finished successfully.', Colors.OKGREEN)
             else:
