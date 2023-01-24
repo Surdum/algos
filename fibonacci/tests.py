@@ -5,39 +5,26 @@ from algorithms import IterativeFibonacci, RecursiveFibonacci, \
 
 
 if __name__ == '__main__':
-    performance = {}
 
-    algs = [IterativeFibonacci, RecursiveFibonacci, GolderRatioFibonacci, MatrixMultiplicationFibonacci]
-    iterations = 2000
-    tester_args = (7, 'tests')
-
-    perf_test = PerformanceComparator(algs)
-    perf_test.calculate(iterations, tester_args)
-    perf_test.show_graph('Fibonacci')
-
-    # algs = [IterativeFibonacci, GolderRatioFibonacci]
+    # algs = [IterativeFibonacci, RecursiveFibonacci, GolderRatioFibonacci, MatrixMultiplicationFibonacci]
     # iterations = 2000
-    # tester_args = (8, 'tests')
+    # tester_args = (7, 'tests')
     #
     # perf_test = PerformanceComparator(algs)
     # perf_test.calculate(iterations, tester_args)
     # perf_test.show_graph('Fibonacci')
 
-    # checker = AlgoTester(IterativeFibonacci)
-    # checker.check(7, 'tests')
-    # performance[checker.alg.description] = checker.performance
-    # #
-    # checker = AlgoTester(RecursiveFibonacci)
-    # checker.check(7, 'tests')
-    # performance[checker.alg.description] = checker.performance
-    # #
-    # checker = AlgoTester(GolderRatioFibonacci)
-    # checker.check(7, 'tests')
-    # performance[checker.alg.description] = checker.performance
-    # #
-    # checker = AlgoTester(MatrixMultiplicationFibonacci)
-    # checker.check(7, 'tests')
-    # performance[checker.alg.description] = checker.performance
+    checker = AlgoTester(IterativeFibonacci)
+    checker.check(8, 'tests', skip_tests=7)
+    #
+    checker = AlgoTester(RecursiveFibonacci)
+    checker.check(7, 'tests', skip_tests=6)
+    #
+    checker = AlgoTester(GolderRatioFibonacci)
+    checker.check(7, 'tests', skip_tests=6)
+    #
+    checker = AlgoTester(MatrixMultiplicationFibonacci)
+    checker.check(10, 'tests', skip_tests=9)
 
 
 
