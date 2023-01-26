@@ -18,8 +18,22 @@ vector_array = VectorArray()
 factor_array = FactorArray()
 matrix_array = MatrixArray()
 
+
+class BuiltInList(list):
+    def add(self, item):
+        super().append(item)
+
+
+builtin_list = BuiltInList()
+
+print('Performance by adding 10.000 elements')
 test_add_array(single_array, 10_000)
 test_add_array(vector_array, 10_000)
 test_add_array(factor_array, 10_000)
 test_add_array(matrix_array, 10_000)
+test_add_array(builtin_list, 10_000)
 
+
+"""
+
+"""

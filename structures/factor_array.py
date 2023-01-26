@@ -45,3 +45,20 @@ class FactorArray:
             new_array[i] = item
         self.array = new_array
 
+    def __str__(self):
+        return str(self.array)
+
+
+if __name__ == '__main__':
+    array = FactorArray()
+    array.add(3)
+    array.add(2)
+    array.add(1)
+    array.add(6)
+    array.add(3)
+    print(array)
+    print('Add item 5 by index 2')
+    array.add_by_index(5, 2)
+    print(array)
+    print('Removed element by index 4:', array.remove(4))
+    print(array)
