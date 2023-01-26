@@ -13,9 +13,17 @@ def test_add_array(data, total):
     print(data.__class__, "test_add_array:", time() - start)
 
 
+def test_pure_list(total):
+    start = time()
+    d = list()
+    for j in range(0, total):
+        d.append(datetime.now())
+    print(d.__class__, "test_pure_list:", time() - start)
+
+
 single_array = SingleArray()
 vector_array = VectorArray()
-factor_array = FactorArray()
+factor_array = FactorArray(factor=120)
 matrix_array = MatrixArray()
 
 
@@ -32,7 +40,7 @@ test_add_array(vector_array, 10_000)
 test_add_array(factor_array, 10_000)
 test_add_array(matrix_array, 10_000)
 test_add_array(builtin_list, 10_000)
-
+test_pure_list(10_000)
 
 """
 
