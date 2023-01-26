@@ -137,7 +137,7 @@ class PriorityQueue:
 
     def __str__(self):
         if self._head is None:
-            return "no elements yet"
+            return "no elements yet\n"
         s = ""
         current_node = self._head
         while current_node.next is not None:
@@ -173,3 +173,6 @@ if __name__ == '__main__':
     prior_queue.dequeue()
     print(prior_queue)
 
+    print('Add item 666 by priority 666')
+    prior_queue.enqueue(666, 666)
+    print(prior_queue)
