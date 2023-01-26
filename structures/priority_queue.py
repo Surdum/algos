@@ -116,24 +116,23 @@ class PriorityQueue:
             priority = self._head.priority
         current_node = self._head
         result_item = None
-        while current_node.next is not None:
-            if current_node.priority == priority:
-                result_item = current_node.queue.dequeue()
-                if len(current_node.queue) == 0:
-                    if current_node.prev is not None and current_node.next is not None:
-                        current_node.next.prev = current_node.prev
-                        current_node.prev.next = current_node.next
-                    elif current_node.prev is None:
-                        current_node.next.prev = None
-                        self._head = current_node.next
-                    elif current_node.next is None:
-                        current_node.prev.next = None
-                        self._tail = current_node.prev
-                    else:
-                        self._head = None
-                        self._tail = None
-                break
+        while current_node.priority != priority and current_node.next is not None:
             current_node = current_node.next
+        if current_node.priority == priority:
+            result_item = current_node.queue.dequeue()
+            if len(current_node.queue) == 0:
+                if current_node.prev is not None and current_node.next is not None:
+                    current_node.next.prev = current_node.prev
+                    current_node.prev.next = current_node.next
+                elif current_node.prev is None and current_node.next is not None:
+                    current_node.next.prev = None
+                    self._head = current_node.next
+                elif current_node.next is None and current_node.prev is not None:
+                    current_node.prev.next = None
+                    self._tail = current_node.prev
+                else:
+                    self._head = None
+                    self._tail = None
         return result_item
 
     def __str__(self):
@@ -164,5 +163,13 @@ if __name__ == '__main__':
     print(prior_queue)
 
     print('Dequeue by priority = 2 returns', prior_queue.dequeue(2))
+    print(prior_queue)
+
+    print('Make dequeue 5 times')
+    prior_queue.dequeue()
+    prior_queue.dequeue()
+    prior_queue.dequeue()
+    prior_queue.dequeue()
+    prior_queue.dequeue()
     print(prior_queue)
 
