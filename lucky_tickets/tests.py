@@ -1,4 +1,4 @@
-from checkers.tester import AlgoTester
+from testers.tester import AlgoTester
 from algorithms import SimpleEnumeration, SumOfSquares, FastLuckyNumbersCounter
 
 

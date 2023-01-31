@@ -1,4 +1,4 @@
-from checkers import AlgoTester, PerformanceComparator
+from testers import AlgoTester, PerformanceComparator
 from algorithms import IterativeFibonacci, RecursiveFibonacci, \
     GolderRatioFibonacci, MatrixMultiplicationFibonacci
 # import matplotlib.pyplot as plt

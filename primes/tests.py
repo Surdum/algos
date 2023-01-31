@@ -1,4 +1,4 @@
-from checkers import AlgoTester
+from testers import AlgoTester
 from primes.algorithms import PrimeNumbersCount, SieveOfEratosthenes
 
 
