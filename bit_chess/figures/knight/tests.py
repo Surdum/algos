@@ -2,7 +2,7 @@ from bit_chess.utils import count_non_zero_bits_2, load_input_data, load_output_
 from bit_chess.figures.knight import calculate_knight_step_mask
 
 
-test_data_set_path = '0.BITS/2.Bitboard - Конь'
+test_data_set_path = 'tests'
 test_data_set_len = 10
 
 for i in range(test_data_set_len):
