@@ -77,6 +77,6 @@ def load_output_data(*path: str):
 
 if __name__ == '__main__':
     # print_chess_mask(1)
-    # print(cut_left_bits(18446744073709551618))
     print(count_non_zero_bits_1(110333))
     print(count_non_zero_bits_2(110333))
+    print(count_non_zero_bits_3(110333))
