@@ -55,14 +55,15 @@ def count_non_zero_bits_2(number: int):
     return c
 
 
+bit_cache = [count_non_zero_bits_2(i) for i in range(256)]
+
+
 def count_non_zero_bits_3(number: int):
     c = 0
-    cache = [count_non_zero_bits_2(i) for i in range(256)]
     while number > 0:
-        c += cache[number & 255]
+        c += bit_cache[number & 255]
         number >>= 8
     return c
-
 
 
 def load_input_data(*path):
