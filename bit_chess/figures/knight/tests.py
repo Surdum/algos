@@ -6,10 +6,10 @@ test_data_set_path = 'tests'
 test_data_set_len = 10
 
 for i in range(test_data_set_len):
-    knight_position = load_input_data(test_data_set_path, f'test.{i}.in')
+    figure_position = load_input_data(test_data_set_path, f'test.{i}.in')
     bit_count, mask = load_output_data(test_data_set_path, f'test.{i}.out')
 
-    step_mask = calculate_knight_step_mask(knight_position)
+    step_mask = calculate_knight_step_mask(figure_position)
     my_bit_count = count_non_zero_bits_2(step_mask)
 
     assert step_mask == mask, f'{step_mask} != {mask}'

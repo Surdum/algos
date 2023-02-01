@@ -38,7 +38,7 @@ def _64_bits_result(func):
     return inner
 
 
-def count_non_zero_bits_1(number):
+def count_non_zero_bits_1(number: int):
     c = 0
     while number > 0:
         if number & 1 == 1:
@@ -47,12 +47,22 @@ def count_non_zero_bits_1(number):
     return c
 
 
-def count_non_zero_bits_2(number):
+def count_non_zero_bits_2(number: int):
     c = 0
     while number > 0:
         number = number & (number - 1)
         c += 1
     return c
+
+
+def count_non_zero_bits_3(number: int):
+    c = 0
+    cache = [count_non_zero_bits_2(i) for i in range(256)]
+    while number > 0:
+        c += cache[number & 255]
+        number >>= 8
+    return c
+
 
 
 def load_input_data(*path):
