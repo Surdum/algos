@@ -2,7 +2,7 @@ from .tester import AlgoTester
 from .utils import Colors, ColorPrint
 
 
-class PerformanceComparator(ColorPrint):
+class PerformanceComparatorWithGraph(ColorPrint):
     performance = {}
     iterations = 0
 

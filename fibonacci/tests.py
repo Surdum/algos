@@ -1,4 +1,4 @@
-from testers import AlgoTester, PerformanceComparator
+from testers import AlgoTester, PerformanceComparatorWithGraph
 from algorithms import IterativeFibonacci, RecursiveFibonacci, \
     GolderRatioFibonacci, MatrixMultiplicationFibonacci
 # import matplotlib.pyplot as plt
@@ -10,7 +10,7 @@ if __name__ == '__main__':
     # iterations = 2000
     # tester_args = (7, 'tests')
     #
-    # perf_test = PerformanceComparator(algs)
+    # perf_test = PerformanceComparatorWithGraph(algs)
     # perf_test.calculate(iterations, tester_args)
     # perf_test.show_graph('Fibonacci')
 
