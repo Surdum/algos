@@ -1,7 +1,7 @@
 def normalize_time(t):
     if int(t) > 0:
         return f"{int(t)}s"
-    units = [(1000, 'ms'), (10**6, 'µs'), (10**9, 'ns')]
+    units = [(1, 's'), (1000, 'ms'), (10**6, 'µs'), (10**9, 'ns')]
     i = 0
     while int((t - int(t)) * units[i][0]) <= 0 and i < len(units):
         i += 1
