@@ -22,6 +22,13 @@ class MatrixOperations:
         return res or 1
 
 
+def generate_random_number_sequence(n):
+    from random import shuffle
+    numbers = list(range(n))
+    shuffle(numbers)
+    return numbers
+
+
 if __name__ == '__main__':
     matrix = MatrixOperations()
     # mat2 = \
