@@ -6,9 +6,6 @@ class ShellSort(AlgoBase, Sort):
     description = "Shell sort"
     delimiter = 2
 
-    def prepare_args(self, *args):
-        return args
-
     def run(self, array):
         gap = len(array) // self.delimiter
         while gap > 0:

@@ -2,7 +2,7 @@ class AlgoBase:
     description = NotImplemented
 
     def prepare_args(self, *args):
-        raise NotImplementedError
+        return args
 
     def run(self, *args):
         raise NotImplementedError

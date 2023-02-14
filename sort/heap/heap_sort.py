@@ -5,9 +5,6 @@ from utils import generate_random_number_sequence
 class HeapSort(AlgoBase, Sort):
     description = "Heap sort"
 
-    def prepare_args(self, *args):
-        return args
-
     def heapify(self, array, index):
         parent_index = (index - 1) // 2
         self.inc_cmp()
@@ -24,9 +21,6 @@ class HeapSort(AlgoBase, Sort):
 
 class HeapSortRecursive(AlgoBase, Sort):
     description = "Heap sort recursive"
-
-    def prepare_args(self, *args):
-        return args
 
     def _heapify(self, array, root, size):
         x = root

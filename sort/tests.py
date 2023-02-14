@@ -1,7 +1,10 @@
 from sort import *
 from testers.performance import SortPerformanceComparator
 from utils import generate_random_number_sequence
+import sys
 
+
+sys.setrecursionlimit(1_000_000)
 
 tester = SortPerformanceComparator()
 

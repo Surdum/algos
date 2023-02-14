@@ -5,9 +5,6 @@ from utils import generate_random_number_sequence
 class SelectionSort(AlgoBase, Sort):
     description = "Selection sort"
 
-    def prepare_args(self, *args):
-        return args
-
     def run(self, array):
         for j in range(len(array) - 1, -1, -1):
             max_item_ind = j

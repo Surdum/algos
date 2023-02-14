@@ -5,9 +5,6 @@ from utils import generate_random_number_sequence
 class InsertionSort(AlgoBase, Sort):
     description = "Insertion sort"
 
-    def prepare_args(self, array: list):
-        return array.copy()
-
     def run(self, array: list):
         for i in range(1, len(array)):
             for j in range(i, 0, -1):
@@ -19,9 +16,6 @@ class InsertionSort(AlgoBase, Sort):
 
 class InsertionSortShift(AlgoBase, Sort):
     description = "Insertion sort shift"
-
-    def prepare_args(self, array: list):
-        return array.copy()
 
     def run(self, array: list):
         for j in range(1, len(array)):
@@ -41,9 +35,6 @@ class InsertionSortShift(AlgoBase, Sort):
 
 class InsertionSortBinary(AlgoBase, Sort):
     description = "Insertion sort binary"
-
-    def prepare_args(self, array: list):
-        return array.copy()
 
     def _binary_search(self, array, key, low, high):
         self.inc_cmp()
@@ -75,9 +66,6 @@ class InsertionSortBinary(AlgoBase, Sort):
 
 class InsertionSortOptimized(AlgoBase, Sort):
     description = "Insertion sort optimized"
-
-    def prepare_args(self, array: list):
-        return array.copy()
 
     def run(self, array: list):
         for i in range(1, len(array)):

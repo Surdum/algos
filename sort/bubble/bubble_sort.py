@@ -5,9 +5,6 @@ from utils import generate_random_number_sequence
 class BubbleSort(AlgoBase, Sort):
     description = "Bubble sort"
 
-    def prepare_args(self, array: list):
-        return array.copy()
-
     def run(self, array: list):
         for i in range(len(array)):
             for j in range(len(array) - 1):
@@ -19,9 +16,6 @@ class BubbleSort(AlgoBase, Sort):
 
 class BubbleSortOptimized(AlgoBase, Sort):
     description = "Bubble sort optimized"
-
-    def prepare_args(self, *args):
-        return args
 
     def run(self, array):
         for i in range(len(array)):
