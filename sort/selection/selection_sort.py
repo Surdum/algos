@@ -1,28 +1,21 @@
-from base import AlgoBase
+from base import AlgoBase, Sort
 from utils import generate_random_number_sequence
 
 
-class SelectionSort(AlgoBase):
+class SelectionSort(AlgoBase, Sort):
     description = "Selection sort"
 
     def prepare_args(self, *args):
         return args
 
     def run(self, array):
-        cmp = 0
-        asg = 0
         for j in range(len(array) - 1, -1, -1):
             max_item_ind = j
             for i in range(j, -1, -1):
-                cmp += 1
+                self.inc_cmp()
                 if array[max_item_ind] < array[i]:
                     max_item_ind = i
-            t = array[j]
-            array[j] = array[max_item_ind]
-            array[max_item_ind] = t
-            asg += 3
-        self.vars['cmp'] = cmp
-        self.vars['asg'] = asg
+            self.swap(array, j, max_item_ind)
         return array
 
 
