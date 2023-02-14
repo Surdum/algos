@@ -9,15 +9,11 @@ class BubbleSort(AlgoBase, Sort):
         return array.copy()
 
     def run(self, array: list):
-        cmp = 0
-        asg = 0
         for i in range(len(array)):
             for j in range(len(array) - 1):
                 self.inc_cmp()
                 if array[j] > array[j+1]:
                     self.swap(array, j, j+1)
-        self.vars['cmp'] = cmp
-        self.vars['asg'] = asg
         return array
 
 
@@ -28,15 +24,11 @@ class BubbleSortOptimized(AlgoBase, Sort):
         return args
 
     def run(self, array):
-        cmp = 0
-        asg = 0
         for i in range(len(array)):
             for j in range(len(array) - i - 1):
                 self.inc_cmp()
                 if array[j] > array[j+1]:
                     self.swap(array, j, j+1)
-        self.vars['cmp'] = cmp
-        self.vars['asg'] = asg
         return array
 
 
