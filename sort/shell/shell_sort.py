@@ -23,7 +23,7 @@ class ShellSort(AlgoBase, Sort):
 
 
 class ShellSort4(ShellSort):
-    description = "Shell sort"
+    description = "Shell sort 4"
     delimiter = 4
 
     def run(self, array):
@@ -31,7 +31,7 @@ class ShellSort4(ShellSort):
 
 
 class ShellSort8(ShellSort):
-    description = "Shell sort"
+    description = "Shell sort 8"
     delimiter = 8
 
     def run(self, array):
