@@ -51,6 +51,7 @@ class SortPerformanceComparator(ColorPrint):
         if additional_vars is None:
             additional_vars = []
         for algo in algorithms:
+            print(algo.description)
             t = {'name': algo.description, 'performance': [],
                  'additional_vars': {av: [] for av in additional_vars}, 'input_data': []}
             for data in dataset:
@@ -68,20 +69,26 @@ class SortPerformanceComparator(ColorPrint):
             self.results.append(t)
 
     def print_results(self):
+        max_len = 1
         for result in self.results:
-            print(result['name'])
-            print('N'.rjust(5, " "), end="")
+            for item in [normalize_time(p) for p in result['performance']] + [str(len(result['input_data'][0][0]))] + \
+                        sum(result['additional_vars'].values(), []):
+                max_len = max(max_len, len(str(item)))
+        n = max_len + 1
+        for result in self.results:
+            print(result['name'].rjust(n * (len(self.results[0]['performance']) + 1)))
+            print('N'.rjust(n, " "), end="")
             for inp in result['input_data']:
-                print(str(len(inp[0])).rjust(7, " "), end="")
+                print(str(len(inp[0])).rjust(n, " "), end="")
             print()
-            print('time'.rjust(5, " "), end="")
+            print('time'.rjust(n, " "), end="")
             for p in result['performance']:
-                print(normalize_time(p).rjust(7, " "), end="")
+                print(normalize_time(p).rjust(n, " "), end="")
             print()
             for k, v in result['additional_vars'].items():
-                print(k.rjust(5, " "), end="")
+                print(k.rjust(n, " "), end="")
                 for item in v:
-                    print(str(item).rjust(7, " "), end="")
+                    print(str(item).rjust(n, " "), end="")
                 print()
             print()
 
