@@ -5,4 +5,6 @@ from .selection import *
 from .heap import *
 from .quick import *
 from .merge import *
-from .external import *
+from .bucket import *
+from .counting import *
+from .radix import *
