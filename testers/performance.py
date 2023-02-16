@@ -57,6 +57,7 @@ class SortPerformanceComparator(ColorPrint):
             for data in dataset:
                 p = 0
                 for i in range(iterations):
+                    print(f'run {len(data[0])} {i+1}/{iterations}')
                     start = time()
                     runner = algo()
                     runner.run(*deepcopy(data))
