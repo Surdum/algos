@@ -1,5 +1,5 @@
 from base import AlgoBase, Sort
-from utils import generate_random_number_sequence
+from utils import generate_shuffled_number_sequence
 
 
 class HeapSort(AlgoBase, Sort):
@@ -46,14 +46,14 @@ class HeapSortRecursive(AlgoBase, Sort):
 
 
 if __name__ == '__main__':
-    shuffled_array = generate_random_number_sequence(10)
+    shuffled_array = generate_shuffled_number_sequence(10)
     print(shuffled_array)
     sort = HeapSort()
     sorted_array = sort.run(shuffled_array)
     print(sorted_array)
     print(sort.vars)
 
-    shuffled_array = generate_random_number_sequence(10)
+    shuffled_array = generate_shuffled_number_sequence(10)
     print(shuffled_array)
     sort = HeapSortRecursive()
     sorted_array = sort.run(shuffled_array)

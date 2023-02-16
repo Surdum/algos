@@ -1,5 +1,5 @@
 from base import AlgoBase, Sort
-from utils import generate_random_number_sequence
+from utils import generate_shuffled_number_sequence
 
 
 class QuickSort(AlgoBase, Sort):
@@ -32,7 +32,7 @@ class QuickSort(AlgoBase, Sort):
 
 
 if __name__ == '__main__':
-    shuffled_array = generate_random_number_sequence(10)
+    shuffled_array = generate_shuffled_number_sequence(10)
     print(shuffled_array)
     sort = QuickSort()
     sorted_array = sort.run(shuffled_array)

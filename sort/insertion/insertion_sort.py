@@ -1,5 +1,5 @@
 from base import AlgoBase, Sort
-from utils import generate_random_number_sequence
+from utils import generate_shuffled_number_sequence
 
 
 class InsertionSort(AlgoBase, Sort):
@@ -78,25 +78,25 @@ class InsertionSortOptimized(AlgoBase, Sort):
 
 
 if __name__ == '__main__':
-    garbage_array = generate_random_number_sequence(10)
+    garbage_array = generate_shuffled_number_sequence(10)
     print('garbage_array', garbage_array)
     sort = InsertionSort()
     sorted_array = sort.run(garbage_array)
     print('sorted_array', sorted_array)
     print()
-    garbage_array = generate_random_number_sequence(10)
+    garbage_array = generate_shuffled_number_sequence(10)
     print('garbage_array', garbage_array)
     sort = InsertionSortOptimized()
     sorted_array = sort.run(garbage_array)
     print('sorted_array', sorted_array)
     print()
-    garbage_array = generate_random_number_sequence(10)
+    garbage_array = generate_shuffled_number_sequence(10)
     print('garbage_array', garbage_array)
     sort = InsertionSortShift()
     sorted_array = sort.run(garbage_array)
     print('sorted_array', sorted_array)
     print()
-    garbage_array = generate_random_number_sequence(10)
+    garbage_array = generate_shuffled_number_sequence(10)
     print('garbage_array', garbage_array)
     sort = InsertionSortBinary()
     sorted_array = sort.run(garbage_array)

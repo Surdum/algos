@@ -1,5 +1,5 @@
 from base import AlgoBase, Sort
-from utils import generate_random_number_sequence
+from utils import generate_shuffled_number_sequence
 
 
 class MergeSort(AlgoBase, Sort):
@@ -50,7 +50,7 @@ class MergeSort(AlgoBase, Sort):
 
 
 if __name__ == '__main__':
-    shuffled_array = generate_random_number_sequence(10)
+    shuffled_array = generate_shuffled_number_sequence(10)
     print(shuffled_array)
     sort = MergeSort()
     sorted_array = sort.run(shuffled_array)

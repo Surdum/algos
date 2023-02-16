@@ -1,5 +1,5 @@
 from base import AlgoBase, Sort
-from utils import generate_random_number_sequence
+from utils import generate_shuffled_number_sequence
 
 
 class BubbleSort(AlgoBase, Sort):
@@ -27,13 +27,13 @@ class BubbleSortOptimized(AlgoBase, Sort):
 
 
 if __name__ == '__main__':
-    garbage_array = generate_random_number_sequence(10)
+    garbage_array = generate_shuffled_number_sequence(10)
     print('garbage_array', garbage_array)
     sort = BubbleSort()
     sorted_array = sort.run(garbage_array)
     print('sorted_array', sorted_array)
     print()
-    garbage_array = generate_random_number_sequence(10)
+    garbage_array = generate_shuffled_number_sequence(10)
     print('garbage_array', garbage_array)
     sort = BubbleSortOptimized()
     sorted_array = sort.run(garbage_array)
