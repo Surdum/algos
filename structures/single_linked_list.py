@@ -95,8 +95,11 @@ class SLL:
 
 
 class SortedSLL(SLL):
-    LESS_THAN = "less than"
-    GREATER_THAN = "greater than"
+    LT = "less than"
+    GT = "greater than"
+    LE = "less or equal that"
+    GE = "greater or equal that"
+    reverse_sign = {LT: GT, GT: LT, GE: LE, LE: GE}
 
     def __init__(self, direction='asc'):
         assert direction in ('asc', 'desc'), "direction have to be 'asc' or 'desc'"
@@ -104,31 +107,33 @@ class SortedSLL(SLL):
 
     def c(self, first, sign, second):
         if self.direction == 'desc':
-            if sign == self.LESS_THAN:
-                sign = self.GREATER_THAN
-            elif sign == self.GREATER_THAN:
-                sign = self.LESS_THAN
-        if sign == self.LESS_THAN:
+            sign = self.reverse_sign[sign]
+        if sign == self.LT:
             return first < second
-        elif sign == self.GREATER_THAN:
+        elif sign == self.GT:
             return first > second
+        elif sign == self.GE:
+            return first >= second
+        elif sign == self.LE:
+            return first <= second
 
     def add_with_sort(self, value):
         new_node = SLLNode(value)
-        if self.parent is None or self.c(value, self.LESS_THAN, self.parent.value):
+        if self.parent is None or self.c(value, self.LT, self.parent.value):
             self.add(value, 0)
-        elif self.c(value, self.GREATER_THAN, self.last_child.value):
+        elif self.c(value, self.GT, self.last_child.value):
             self.last_child.next = new_node
             self.last_child = new_node
         else:
             prev_node = None
             curr_node = self.parent
             index = 0
-            while self.c(value, self.GREATER_THAN, curr_node.value):
+            while self.c(value, self.GT, curr_node.value):
                 prev_node = curr_node
                 curr_node = curr_node.next
                 index += 1
-            prev_node.next = new_node
+            if prev_node:
+                prev_node.next = new_node
             new_node.next = curr_node
 
 
