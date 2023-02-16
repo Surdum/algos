@@ -29,6 +29,11 @@ def generate_shuffled_number_sequence(n):
     return numbers
 
 
+def generate_random_number_sequence(n, t):
+    from random import randint
+    return [randint(0, t) for _ in range(n)]
+
+
 if __name__ == '__main__':
     matrix = MatrixOperations()
     # mat2 = \
