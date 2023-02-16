@@ -46,18 +46,23 @@ class PerformanceComparatorWithGraph(ColorPrint):
 
 class SortPerformanceComparator(ColorPrint):
     results: list = []
+    input_data_len: list = []
 
-    def calculate(self, algorithms, dataset, additional_vars=None, iterations=1):
+    def calculate(self, algorithms, dataset, additional_vars=None, iterations=1, print_steps=False):
         if additional_vars is None:
             additional_vars = []
+        if not self.input_data_len:
+            self.input_data_len.extend([len(data[0]) for data in dataset])
         for algo in algorithms:
-            print(algo.description)
+            if print_steps:
+                print(algo.description)
             t = {'name': algo.description, 'performance': [],
-                 'additional_vars': {av: [] for av in additional_vars}, 'input_data': []}
+                 'additional_vars': {av: [] for av in additional_vars}}
             for data in dataset:
                 p = 0
                 for i in range(iterations):
-                    print(f'run {len(data[0])} {i+1}/{iterations}')
+                    if print_steps:
+                        print(f'run {len(data[0])} {i+1}/{iterations}')
                     start = time()
                     runner = algo()
                     runner.run(*deepcopy(data))
@@ -66,21 +71,30 @@ class SortPerformanceComparator(ColorPrint):
                         for av in additional_vars:
                             t['additional_vars'][av].append(runner.vars[av])
                 t['performance'].append(p / iterations)
-                t['input_data'].append(data)
-            self.results.append(t)
+            ind = None
+            for i, r in enumerate(self.results):
+                if r['name'] == algo.description:
+                    ind = i
+                    break
+            if ind is not None:
+                for i in range(len(self.results[ind]['performance'])):
+                    self.results[ind]['performance'][i] = (self.results[ind]['performance'][i] + t['performance'][i]) / 2
+            else:
+                self.results.append(t)
 
     def print_results(self):
         max_len = 1
-        for result in self.results:
-            for item in [normalize_time(p) for p in result['performance']] + [str(len(result['input_data'][0][0]))] + \
+        for i, result in enumerate(self.results):
+            for item in [normalize_time(p) for p in result['performance']] + \
+                        [str(i) for i in self.input_data_len] + \
                         sum(result['additional_vars'].values(), []):
                 max_len = max(max_len, len(str(item)))
         n = max_len + 1
         for result in self.results:
             print(result['name'].rjust(n * (len(self.results[0]['performance']) + 1)))
             print('N'.rjust(n, " "), end="")
-            for inp in result['input_data']:
-                print(str(len(inp[0])).rjust(n, " "), end="")
+            for inp_len in self.input_data_len:
+                print(str(inp_len).rjust(n, " "), end="")
             print()
             print('time'.rjust(n, " "), end="")
             for p in result['performance']:
