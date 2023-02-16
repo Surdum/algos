@@ -1,5 +1,5 @@
 from base import AlgoBase, Sort
-from utils import generate_random_number_sequence
+from utils import generate_shuffled_number_sequence
 
 
 class SelectionSort(AlgoBase, Sort):
@@ -17,7 +17,7 @@ class SelectionSort(AlgoBase, Sort):
 
 
 if __name__ == '__main__':
-    shuffled_array = generate_random_number_sequence(100)
+    shuffled_array = generate_shuffled_number_sequence(100)
     print(shuffled_array)
     sort = SelectionSort()
     sorted_array = sort.run(shuffled_array)

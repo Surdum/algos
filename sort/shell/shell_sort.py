@@ -1,5 +1,5 @@
 from base import AlgoBase, Sort
-from utils import generate_random_number_sequence
+from utils import generate_shuffled_number_sequence
 
 
 class ShellSort(AlgoBase, Sort):
@@ -36,7 +36,7 @@ class ShellSort8(ShellSort):
 
 
 if __name__ == '__main__':
-    garbage_array = generate_random_number_sequence(10)
+    garbage_array = generate_shuffled_number_sequence(10)
     print('garbage_array', garbage_array)
     sort = ShellSort()
     sorted_array = sort.run(garbage_array)
