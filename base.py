@@ -1,5 +1,13 @@
+import re
+
+
 class AlgoBase:
-    description = NotImplemented
+    @property
+    def description(self):
+        words = re.findall('[A-Z][^A-Z]*', self.__class__.__name__)
+        for i in range(1, len(words)):
+            words[i] = words[i].lower()
+        return ' '.join(words)
 
     def prepare_args(self, *args):
         return args
