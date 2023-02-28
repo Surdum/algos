@@ -55,8 +55,8 @@ class SortPerformanceComparator(ColorPrint):
             self.input_data_len.extend([len(data[0]) for data in dataset])
         for algo in algorithms:
             if print_steps:
-                print(algo.description)
-            t = {'name': algo.description, 'performance': [],
+                print(algo().description)
+            t = {'name': algo().description, 'performance': [],
                  'additional_vars': {av: [] for av in additional_vars}}
             for data in dataset:
                 p = 0
