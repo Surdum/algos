@@ -17,7 +17,8 @@ class AlgoBase:
 
 
 class Sort:
-    vars = {'cmp': 0, 'asg': 0}
+    def __init__(self):
+        self.vars = {'cmp': 0, 'asg': 0}
 
     def inc_cmp(self, value=1):
         self.vars['cmp'] += value
