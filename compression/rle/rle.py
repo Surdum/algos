@@ -1,9 +1,10 @@
 import os
+import io
 from base import AlgoBase
 from compression.utils import *
 
 
-class RLE(AlgoBase):
+class RLEBase(AlgoBase):
     COMPRESS = 'compress'
     UNCOMPRESS = 'uncompress'
 
@@ -18,60 +19,64 @@ class RLE(AlgoBase):
         with open(output_filename, 'wb') as f:
             f.write(_bytes)
 
-    def _compress(self, file):
-        sign = file.read(1)
+    def compress_text(self, text):
+        if isinstance(text, str):
+            text = text.encode()
+        return self._compress(io.BytesIO(text))
+
+    def decompress_text(self, text):
+        if isinstance(text, str):
+            text = text.encode()
+        return self._decompress(io.BytesIO(text))
+
+    def _compress(self, _bytes):
+        return NotImplemented
+
+    def _decompress(self, _bytes):
+        return NotImplemented
+
+
+class RLE(RLEBase):
+    def _compress(self, _bytes):
+        sign = _bytes.read(1)
         number = 1
         compressed = b''
         while True:
-            b = file.read(1)
+            b = _bytes.read(1)
             if not b:
                 break
             if b == sign:
                 number += 1
             else:
-                compressed += bytes([number]) + sign
+                compressed += int_to_bytes(number) + sign
                 sign = b
                 number = 1
             if number == 255:
-                compressed += bytes([number]) + sign
+                compressed += int_to_bytes(number) + sign
                 number = 0
-        compressed += bytes([number]) + sign
+        compressed += int_to_bytes(number) + sign
         return compressed
 
-    def _decompress(self, file):
+    def _decompress(self, _bytes):
         decompressed = b''
         while True:
-            number = int_from_bytes(file.read(1))
+            number = int_from_bytes(_bytes.read(1))
             if not number:
                 break
-            sign = file.read(1)
+            sign = _bytes.read(1)
             for _ in range(number):
                 decompressed += sign
         return decompressed
 
 
-class BetterRLE(AlgoBase):
-    COMPRESS = 'compress'
-    UNCOMPRESS = 'uncompress'
-
-    def run(self, input_filename, output_filename, mode=COMPRESS):
-        file = open(input_filename, 'rb')
-        if mode == self.COMPRESS:
-            _bytes = self._compress(file)
-        elif mode == self.UNCOMPRESS:
-            _bytes = self._decompress(file)
-        else:
-            raise
-        with open(output_filename, 'wb') as f:
-            f.write(_bytes)
-
-    def _compress(self, file):
-        sign = file.read(1)
+class OptimizedRLE(RLEBase):
+    def _compress(self, _bytes):
+        sign = _bytes.read(1)
         number = 1
         compressed = b''
         alone_stack = []
         while True:
-            b = file.read(1)
+            b = _bytes.read(1)
             if not b:
                 break
             if b == sign:
@@ -102,17 +107,17 @@ class BetterRLE(AlgoBase):
         compressed += int_to_bytes(number, signed=True) + sign
         return compressed
 
-    def _decompress(self, file):
+    def _decompress(self, _bytes):
         decompressed = b''
         while True:
-            number = int_from_bytes(file.read(1), signed=True)
+            number = int_from_bytes(_bytes.read(1), signed=True)
             if not number:
                 break
             if number < 0:
                 for _ in range(abs(number)):
-                    decompressed += file.read(1)
+                    decompressed += _bytes.read(1)
             else:
-                b = file.read(1)
+                b = _bytes.read(1)
                 for _ in range(number):
                     decompressed += b
         return decompressed
@@ -130,7 +135,7 @@ if __name__ == '__main__':
     print('Is same:', is_same_content('not-compressed.txt', 'uncompressed.txt'))
     print()
 
-    brle = BetterRLE()
+    brle = OptimizedRLE()
     print('RLE Optimized')
     file_info('not-compressed.txt')
     brle.run('not-compressed.txt', 'compressed-b.txt')
