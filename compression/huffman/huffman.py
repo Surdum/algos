@@ -110,7 +110,7 @@ class Huffman(AlgoBase):
                 buffer = buffer[8:]
             b = _bytes.read(1)
         if buffer:
-            compressed += int_to_byte(self.str_to_int(buffer[:len(buffer)].ljust(8, '0')))
+            compressed += int_to_byte(self.str_to_int(buffer.ljust(8, '0')))
         return parent, compressed
 
     def get_code(self, node, code, bit=''):
