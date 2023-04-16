@@ -4,7 +4,7 @@ from base import AlgoBase
 from compression.utils import *
 
 
-class RLEBase(AlgoBase):
+class Compressor(AlgoBase):
     COMPRESS = 'compress'
     UNCOMPRESS = 'uncompress'
 
@@ -36,40 +36,7 @@ class RLEBase(AlgoBase):
         return NotImplemented
 
 
-class RLE(RLEBase):
-    def _compress(self, _bytes):
-        sign = _bytes.read(1)
-        number = 1
-        compressed = b''
-        while True:
-            b = _bytes.read(1)
-            if not b:
-                break
-            if b == sign:
-                number += 1
-            else:
-                compressed += int_to_bytes(number) + sign
-                sign = b
-                number = 1
-            if number == 255:
-                compressed += int_to_bytes(number) + sign
-                number = 0
-        compressed += int_to_bytes(number) + sign
-        return compressed
-
-    def _decompress(self, _bytes):
-        decompressed = b''
-        while True:
-            number = int_from_bytes(_bytes.read(1))
-            if not number:
-                break
-            sign = _bytes.read(1)
-            for _ in range(number):
-                decompressed += sign
-        return decompressed
-
-
-class OptimizedRLE(RLEBase):
+class RLE(Compressor):
     def _compress(self, _bytes):
         sign = _bytes.read(1)
         number = 1
@@ -126,20 +93,19 @@ class OptimizedRLE(RLEBase):
 if __name__ == '__main__':
     # generate_random_file('not-compressed.txt', 2048)
     rle = RLE()
-    print('RLE')
+    print('RLE TEXT')
     file_info('not-compressed.txt')
-    rle.run('not-compressed.txt', 'compressed.txt')
-    file_info('compressed.txt')
-    rle.run('compressed.txt', 'uncompressed.txt', mode=RLE.UNCOMPRESS)
-    file_info('uncompressed.txt')
-    print('Is same:', is_same_content('not-compressed.txt', 'uncompressed.txt'))
+    rle.run('not-compressed.txt', 'compressed-b.txt')
+    file_info('compressed-b.txt')
+    rle.run('compressed-b.txt', 'uncompressed-b.txt', mode=RLE.UNCOMPRESS)
+    file_info('uncompressed-b.txt')
+    print('Is same:', file_content_is_same('not-compressed.txt', 'uncompressed-b.txt'))
     print()
 
-    brle = OptimizedRLE()
-    print('RLE Optimized')
-    file_info('not-compressed.txt')
-    brle.run('not-compressed.txt', 'compressed-b.txt')
-    file_info('compressed-b.txt')
-    brle.run('compressed-b.txt', 'uncompressed-b.txt', mode=RLE.UNCOMPRESS)
-    file_info('uncompressed-b.txt')
-    print('Is same:', is_same_content('not-compressed.txt', 'uncompressed-b.txt'))
+    print('RLE BMP')
+    file_info('Безымянный.bmp')
+    rle.run('Безымянный.bmp', 'Безымянный.bmp.rle')
+    file_info('Безымянный.bmp.rle')
+    rle.run('Безымянный.bmp.rle', 'Безымянный-uncompressed.bmp', mode=RLE.UNCOMPRESS)
+    file_info('Безымянный-uncompressed.bmp')
+    print('Is same:', file_content_is_same('Безымянный.bmp', 'Безымянный-uncompressed.bmp'))

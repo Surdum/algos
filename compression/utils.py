@@ -8,8 +8,14 @@ def generate_random_file(filename, size):
             f.write(int_to_bytes(randint(0, 255)))
 
 
-def is_same_content(filename1, filename2):
-    return open(filename1, 'rb').read() == open(filename2, 'rb').read()
+def file_content_is_same(fp1, fp2):
+    try:
+        with open(fp1, 'rb') as f1, open(fp2, 'rb') as f2:
+            if f1.read(1) != f2.read(1):
+                return False
+    except StopIteration:
+        return False
+    return True
 
 
 def file_info(filename):
