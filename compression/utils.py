@@ -9,12 +9,16 @@ def generate_random_file(filename, size):
 
 
 def file_content_is_same(fp1, fp2):
-    try:
-        with open(fp1, 'rb') as f1, open(fp2, 'rb') as f2:
-            if f1.read(1) != f2.read(1):
+    with open(fp1, 'rb') as f1, open(fp2, 'rb') as f2:
+        b1 = f1.read(1)
+        b2 = f2.read(1)
+        while b1 and b2:
+            if b1 != b2:
                 return False
-    except StopIteration:
-        return False
+            b1 = f1.read(1)
+            b2 = f2.read(1)
+        if (b1 and not b2) or (not b1 and b2):
+            return False
     return True
 
 
