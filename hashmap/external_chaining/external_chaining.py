@@ -14,7 +14,7 @@ class Node:
 
 class HashMap:
     def __init__(self, init_size=10):
-        self._table: typing.List[Node or None] = [None for _ in range(init_size)]
+        self._table = [None] * init_size
         self._size = init_size
         self._length = 0
 
