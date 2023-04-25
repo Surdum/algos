@@ -1,6 +1,6 @@
 class Search:
     @staticmethod
-    def search_full_scan(string: str, substring: str) -> int:
+    def full_scan(string: str, substring: str) -> int:
         t = 0
         while t <= (len(string) - len(substring)):
             m = 0
@@ -12,7 +12,7 @@ class Search:
         return -1
 
     @staticmethod
-    def search_bmh(string: str, substring: str) -> int:
+    def bmh(string: str, substring: str) -> int:
         shift = Search.create_shift(substring)
         t = 0
         while t <= (len(string) - len(substring)):
@@ -35,5 +35,5 @@ class Search:
 if __name__ == '__main__':
     source_text = '000000000001010000000'
     search_text = '101'
-    print('Полный перебор:', Search.search_full_scan(source_text, search_text))
-    print('БМХ:', Search.search_bmh(source_text, search_text))
+    print('Полный перебор:', Search.full_scan(source_text, search_text))
+    print('БМХ:', Search.bmh(source_text, search_text))
